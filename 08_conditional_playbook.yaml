@@ -1,0 +1,24 @@
+-
+  name: tasks on target1
+  hosts: target1
+  vars:
+    thePackages:
+      - name: python3-tornado
+      - name: python3-podman
+      - name: python3-lxml
+  tasks:
+    - name: "install {{ item.name }}"
+      dnf:
+        name: "{{ item.name }}"
+        state: present
+      when: ansible_os_family == "RedHat"
+      loop: "{{ thePackages }}"
+      become: true
+    - name: "check chronyd"
+      service:
+        name: chronyd
+        state: started
+      register: result
+    - name: "notification"
+      command: "wall chronyd is ip"
+      when: result.state == 'started'

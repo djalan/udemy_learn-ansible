@@ -1,0 +1,5 @@
+localhost ansible_host=127.0.0.1 ansible_connection=local
+
+[targets]
+target1 ansible_host=192.168.122.244 ansible_ssh_pass=target1
+target2 ansible_host=192.168.122.215 ansible_ssh_pass=target2

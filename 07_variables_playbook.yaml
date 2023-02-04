@@ -1,0 +1,17 @@
+# ansible target1 -m lineinfile -a path=/tmp/alain line="nameserver 8.8.8.8"
+-
+  name: add line to file
+  hosts: target1
+  tasks:
+    - name: touch file
+      file:
+        state: touch
+        path: /tmp/alain
+    - name: add google dns line
+      lineinfile: 
+        path: /tmp/alain
+        line: 'nameserver {{ google_dns }}'
+    - name: add some random variable from target1
+      lineinfile: 
+        path: /tmp/alain
+        line: 'nameserver {{ cloudflare_dns }}'

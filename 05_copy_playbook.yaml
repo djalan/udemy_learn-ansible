@@ -1,0 +1,11 @@
+-
+  name: Test connectivity to target servers
+  hosts: target1
+  tasks: 
+    - name: my own test copy file
+      copy: 
+        src: /tmp/alain
+        dest: /var/tmp/alain
+        owner: alain
+        group: alain
+        mode: 0744
